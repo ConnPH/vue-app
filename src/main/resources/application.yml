@@ -1,0 +1,53 @@
+spring:
+  data:
+    mongodb:
+      # 主机
+      host: 39.103.160.187
+      # 端口
+      port: 27017
+      # 用户名
+      username: root
+      # 密码
+      password: '123456'
+      # 验证的数据库
+      authentication-database: admin
+      # 数据库
+      database: gzy
+  datasource:
+    # 驱动
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    # url连接
+    url: jdbc:mysql://localhost:3308/count?serverTimezone=Asia/Shanghai&userUnicode=true&charsetEncoding=utf8
+    # 用户名
+    username: root
+    # 密码
+    password: root
+  jackson:
+    time-zone: GMT+8
+    date-format: yyyy-MM-dd HH:mm:ss
+    locale: zh_CN
+    generator:
+      write-numbers-as-strings: true
+      write-bigdecimal-as-plain: true
+  mvc:
+    servlet:
+      load-on-startup: 1
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
+  main:
+    allow-bean-definition-overriding: true
+
+mybatis-plus:
+  configuration:
+    # 日志
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  # mapper文件
+  mapper-locations: classpath*:/mapper/*.xml
+
+logging:
+  level:
+    # 日志等级
+    root: info
+

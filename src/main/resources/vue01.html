@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue01</title>
+</head>
+<body>
+
+<div id="app">
+    {{title}}
+    <hr/>
+    {{name}}
+
+    <p><button v-on:click="login">登录</button></p>
+    <p><button  @click="login">@登录</button></p>
+
+    <p><textarea id="content" cols="30" rows="10" maxlength="150" v-on:keydown="keyupContent" v-on:keyup="keyupContent"></textarea></p>
+    <span>你还可以输入{{size}}个字</span>
+</div>
+
+<script src="js/vue.min.js"></script>
+
+<script>
+     const vm = new Vue({
+        el:"#app",
+        data:{
+            size:150,
+            name:"张三",
+            title:"这是一首简单的歌!"
+        },
+        methods:{
+            login(){
+                console.log("点击了我")
+                alert("点击了我")
+            },
+            keyupContent(){
+                const content = document.getElementById("content").value;
+                const zsize = 150-content.length;
+                this.size = zsize;
+            }
+        }
+    })
+</script>
+</body>
+</html>
