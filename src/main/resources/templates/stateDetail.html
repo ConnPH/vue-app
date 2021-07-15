@@ -11,10 +11,9 @@
     <style>
         .gyz-headerbox {
             height: 150px;
-            background: #2D93CA;
+            background: url("https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=3827122839,3302242264&fm=26&gp=0.jpg");
             text-align: center;
-            background: #01AAED;
-            color: white
+            color: white;
         }
 
         .gyz-headerbox .title {
@@ -103,13 +102,14 @@
         },
         methods:{
             loadStateDetail:function (){
+                var that = this;
                 axios.get("/v1/api/getStateDetail?stateId=1").then(function (res){
                     console.log(res.data.data.stateVo)
-                    var that = this;
                     that.stateVo = res.data.data.stateVo;
                     // console.log(stateVo)
-                    var stateDetailList = res.data.data.stateDetailList;
 
+                    var stateDetailList = res.data.data.stateVo.stateDetailList;
+                    console.log(stateDetailList)
                     that.loadEcharts(stateDetailList);
                 }).catch(function (err){
 
@@ -117,14 +117,14 @@
             },
             loadEcharts:function (stateDetailList) {
 
-                if (stateDetailList && stateDetailList.length == 0) return;
+                // if (stateDetailList && stateDetailList.length == 0) return;
 
                 var xAxisData = [];
                 var yAxisData = [];
 
                 for (let i = 0; i < stateDetailList.length; i++) {
-                    xAxisData.push(stateDetailList.title)
-                    yAxisData.push(stateDetailList.itemNum)
+                    xAxisData.push(stateDetailList[i].title)
+                    yAxisData.push(stateDetailList[i].itemNum)
                 }
 
 
@@ -134,18 +134,18 @@
                 // 指定图表的配置项和数据
                 var option = {
                     title: {
-                        text: 'ECharts 入门示例'
+                        text: '统计报表信息'
                     },
                     tooltip: {},
                     legend: {
-                        data: ['销量']
+                        data: ['明细']
                     },
                     xAxis: {
                         data: xAxisData
                     },
                     yAxis: {},
                     series: [{
-                        name: '销量',
+                        name: '明细',
                         type: 'bar',
                         data: yAxisData
                     }]
