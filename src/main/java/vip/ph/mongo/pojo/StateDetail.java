@@ -11,13 +11,13 @@ import java.util.Date;
 /**
  * @author Just be alive
  * @version 1.0
- * @date 2021-07-13 - 21:46
+ * @date 2021-07-14 - 22:16
  */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@TableName("gyz_state")
-public class State implements Serializable {
+@TableName("gyz_state_detail")
+public class StateDetail implements Serializable {
 
     // Caused by: java.net.NoRouteToHostException: No route to host: connect
     private static final long serialVersionUID = 1L;
@@ -27,11 +27,7 @@ public class State implements Serializable {
 
     private String title;
 
-    private String description;
-
-    private Integer personNum;
-
-    private String endTime;
+    private String itemNum;
 
     private Integer status;
 
@@ -45,7 +41,8 @@ public class State implements Serializable {
 
     private Integer userId;
 
-    private String userName;
+    private Integer stateId;
 
-    private String image;
+    private String userName;
 }
+

@@ -1,28 +1,26 @@
-package vip.ph.mongo.pojo;
+package vip.ph.mongo.vo;
 
 import com.baomidou.mybatisplus.annotation.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import vip.ph.mongo.pojo.StateDetail;
 
-import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author Just be alive
  * @version 1.0
- * @date 2021-07-13 - 21:46
+ * @date 2021-07-14 - 22:22
  */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@TableName("gyz_state")
-public class State implements Serializable {
-
+public class StateVo {
     // Caused by: java.net.NoRouteToHostException: No route to host: connect
     private static final long serialVersionUID = 1L;
 
-    @TableId(type = IdType.AUTO)
     private Integer id;
 
     private String title;
@@ -35,10 +33,8 @@ public class State implements Serializable {
 
     private Integer status;
 
-    @TableField(fill = FieldFill.INSERT)
     private Date createTime;
 
-    @TableField(fill = FieldFill.INSERT_UPDATE)
     private Date updateTime;
 
     private Date modifyTime;
@@ -48,4 +44,6 @@ public class State implements Serializable {
     private String userName;
 
     private String image;
+
+    private List<StateDetail> stateDetailList;
 }

@@ -6,8 +6,119 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="layui/css/layui.css">
+    <style>
+        .gyz-headerbox {
+            height: 150px;
+            background: #2D93CA;
+            text-align: center;
+            background: #01AAED;
+            color: white
+        }
+
+        .gyz-headerbox .title {
+            font-size: 28px
+        }
+
+        .gyz-cheader {
+            width: 500px;
+            text-align: center;
+            margin: 0 auto;
+            padding-top: 10px
+        }
+
+        .gyz-center {
+            padding-top: 17px
+        }
+
+        .gyz-center2 {
+            padding-top: 10px
+        }
+        .gyz-section{padding-top: 100px}
+    </style>
 </head>
 <body>
 
+
+<!-- 头部-->
+<header>
+    <div class="gyz-headerbox">
+        <div class="gyz-cheader">
+            <p class="title pt28 b">2021季度7月份学生信息统计</p>
+            <p class="gyz-center2">
+                描述：xxxxxxxxxxxxxxx描述：xxxxxxxxxxxxxxx描述：xxxxxxxxxxxxxxx描述：xxxxxxxxxxxxxxx描述：xxxxxxxxxxxxxxx描述：xxxxxxxxxxxxxxx描述：xxxxxxxxxxxxxxx描述：xxxxxxxxxxxxxxx</p>
+            <p class="gyz-center f12">
+                <span class="mr30">参加人数 50人</span>
+                <span>xxx时间 yyyy-mm-dd HH:mm:ss</span>
+            </p>
+        </div>
+    </div>
+</header>
+<!--中间内容-->
+<section class="gyz-section">
+    <div class="layui-container">
+        <div class="layui-row" style="text-align: center">
+            <div class="layui-col-md12">
+                11111111111111
+                <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+                <div id="main" style="width: 100%;height:400px;"></div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--底部-->
+<footer class="mt30">
+    <div class="layui-container">
+        <div class="layui-row" style="text-align: center">
+            <div class="layui-col-md12">
+                <p class="b f20">统计剩余0天10小时18分钟</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+<script src="layui/layui.js"></script>
+<script src="js/vue.min.js"></script>
+<script src="js/axios.min.js"></script>
+<script src="js/jquery.min.js"></script>
+<script src="js/echarts.min.js"></script>
+
+<!--<script>-->
+<!--    layui.use(['layer', 'form'], function(){-->
+<!--        var layer = layui.layer,form = layui.form;-->
+<!--        layer.msg('请重新登录!');-->
+<!--    });-->
+<!--</script>-->
+
+
+<script type="text/javascript">
+    // 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.getElementById('main'));
+
+    // 指定图表的配置项和数据
+    var option = {
+        title: {
+            text: 'ECharts 入门示例'
+        },
+        tooltip: {},
+        legend: {
+            data: ['销量']
+        },
+        xAxis: {
+            data: ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
+        },
+        yAxis: {},
+        series: [{
+            name: '销量',
+            type: 'bar',
+            data: [5, 20, 36, 10, 10, 20]
+        }]
+    };
+
+    // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+</script>
 </body>
 </html>
