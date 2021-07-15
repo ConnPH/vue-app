@@ -1,0 +1,10 @@
+spring:
+  datasource:
+    # 驱动
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    # url连接
+    url: jdbc:mysql://localhost:3308/count?serverTimezone=Asia/Shanghai&userUnicode=true&charsetEncoding=utf8
+    # 用户名
+    username: root
+    # 密码
+    password: root

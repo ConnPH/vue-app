@@ -1,4 +1,6 @@
 spring:
+  profiles:
+    active: dev
   data:
     mongodb:
       # 主机
@@ -13,15 +15,6 @@ spring:
       authentication-database: admin
       # 数据库
       database: gzy
-  datasource:
-    # 驱动
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    # url连接
-    url: jdbc:mysql://localhost:3308/count?serverTimezone=Asia/Shanghai&userUnicode=true&charsetEncoding=utf8
-    # 用户名
-    username: root
-    # 密码
-    password: root
   jackson:
     time-zone: GMT+8
     date-format: yyyy-MM-dd HH:mm:ss
