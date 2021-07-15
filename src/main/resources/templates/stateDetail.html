@@ -44,17 +44,15 @@
 <body>
 
 <div id="app">
-    {{id}}
     <!-- 头部-->
     <header>
         <div class="gyz-headerbox">
             <div class="gyz-cheader">
-                <p class="title pt28 b">2021季度7月份学生信息统计</p>
-                <p class="gyz-center2">
-                    描述：xxxxxxxxxxxxxxx描述：xxxxxxxxxxxxxxx描述：xxxxxxxxxxxxxxx描述：xxxxxxxxxxxxxxx描述：xxxxxxxxxxxxxxx描述：xxxxxxxxxxxxxxx描述：xxxxxxxxxxxxxxx描述：xxxxxxxxxxxxxxx</p>
+                <p class="title pt28 b">{{stateVo.title}}</p>
+                <p class="gyz-center2" v-html="stateVo.description"></p>
                 <p class="gyz-center f12">
-                    <span class="mr30">参加人数 50人</span>
-                    <span>xxx时间 yyyy-mm-dd HH:mm:ss</span>
+                    <span class="mr30">参加人数: {{stateVo.personNum}}</span>
+                    <span>统计时间: {{stateVo.createTime}}</span>
                 </p>
             </div>
         </div>
@@ -75,7 +73,7 @@
         <div class="layui-container">
             <div class="layui-row" style="text-align: center">
                 <div class="layui-col-md12">
-                    <p class="b f20">统计剩余0天10小时18分钟</p>
+                    <p class="b f20">统计剩余{{stateVo.endTime}}</p>
                 </div>
             </div>
         </div>
@@ -98,7 +96,7 @@
     const  vm = new Vue({
         el: '#app',
         data:{
-            id:''
+            stateVo:{}
         },
         created:function (){
             this.loadStateDetail()
@@ -106,47 +104,59 @@
         methods:{
             loadStateDetail:function (){
                 axios.get("/v1/api/getStateDetail?stateId=1").then(function (res){
-                    // console.log(res.data.stateVo)
+                    console.log(res.data.data.stateVo)
                     var that = this;
-                    that.id = res.data.stateVo.id
+                    that.stateVo = res.data.data.stateVo;
                     // console.log(stateVo)
+                    var stateDetailList = res.data.data.stateDetailList;
+
+                    that.loadEcharts(stateDetailList);
                 }).catch(function (err){
 
                 })
+            },
+            loadEcharts:function (stateDetailList) {
+
+                if (stateDetailList && stateDetailList.length == 0) return;
+
+                var xAxisData = [];
+                var yAxisData = [];
+
+                for (let i = 0; i < stateDetailList.length; i++) {
+                    xAxisData.push(stateDetailList.title)
+                    yAxisData.push(stateDetailList.itemNum)
+                }
+
+
+                // 基于准备好的dom，初始化echarts实例
+                var myChart = echarts.init(document.getElementById('main'));
+
+                // 指定图表的配置项和数据
+                var option = {
+                    title: {
+                        text: 'ECharts 入门示例'
+                    },
+                    tooltip: {},
+                    legend: {
+                        data: ['销量']
+                    },
+                    xAxis: {
+                        data: xAxisData
+                    },
+                    yAxis: {},
+                    series: [{
+                        name: '销量',
+                        type: 'bar',
+                        data: yAxisData
+                    }]
+                };
+
+                // 使用刚指定的配置项和数据显示图表。
+                myChart.setOption(option);
             }
         }
     })
 </script>
-
-<script type="text/javascript">
-    // 基于准备好的dom，初始化echarts实例
-    var myChart = echarts.init(document.getElementById('main'));
-
-    // 指定图表的配置项和数据
-    var option = {
-        title: {
-            text: 'ECharts 入门示例'
-        },
-        tooltip: {},
-        legend: {
-            data: ['销量']
-        },
-        xAxis: {
-            data: ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
-        },
-        yAxis: {},
-        series: [{
-            name: '销量',
-            type: 'bar',
-            data: [5, 20, 36, 10, 10, 20]
-        }]
-    };
-
-    // 使用刚指定的配置项和数据显示图表。
-    myChart.setOption(option);
-</script>
-
-
 
 </body>
 </html>
